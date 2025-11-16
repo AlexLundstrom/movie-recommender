@@ -4,7 +4,7 @@ function Movie() {
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/movie/tt0468569")
+    fetch("http://localhost:5000/movie/tt0111161")
       .then(res => res.json())
       .then(setMovie)
       .catch(() => setMovie(null));
@@ -14,11 +14,9 @@ function Movie() {
 
   return (
     <div>
-      <h1>{movie.Title}</h1>
-      <p>{movie.Plot}</p>
-      {movie.Poster && movie.Poster !== "N/A" && (
-        <img src={movie.Poster} alt={movie.Title} />
-      )}
+      <h1>{movie.title}</h1>
+      <p>{movie.plot}</p>
+      <h2>{movie.year}</h2>
     </div>
   );
 }
