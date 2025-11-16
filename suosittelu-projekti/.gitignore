@@ -24,7 +24,7 @@ dist-ssr
 *.sw?
 
 # Python
-__pycache__/
+api/__pycache__/
 *.pyc
 *.pyo
 *.pyd
