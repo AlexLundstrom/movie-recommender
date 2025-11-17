@@ -9,43 +9,43 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
-API_KEY=""
+db_path="movies.db"
 
-movie_ids=["tt0111161",
-"tt0068646",
-"tt0071562",
-"tt0468569",
-"tt0050083",
-"tt0108052",
-"tt0167260",
-"tt0110912",
-"tt0060196"]
+#Connects to the movies database, and fetches every movie in it.
+def get_movies_from_database():
+    conn=sqlite3.connect("movies.db",check_same_thread=False)
+    cur=conn.cursor()
+    cur.execute("SELECT imdb_id, title, year, genre, plot FROM movies")
+    rows=cur.fetchall()
+    conn.close()
 
-conn=sqlite3.connect("movies.db",check_same_thread=False)
-cur=conn.cursor()
+    movies=[]
+    for row in rows:
+        movies.append({
+            "imdb_id": row[0],
+            "title": row[1],
+            "year": row[2],
+            "genre": row[3],
+            "plot": row[4],
 
-@app.route("/movie/<id>")
-def get_movie(id):
-    cur.execute("SELECT imdb_id, title, year, genre, plot FROM movies WHERE imdb_id=?", (id,))
-    row=cur.fetchone()
+        })
+    return movies
 
-    if row is None:
-        return jsonify({"error": "Movie not found"}), 404
+#API endpoints, that returns all movies in the database as json.
+@app.route("/movies", methods=["GET"])
+def get_movies():
+    movies=get_movies_from_database()
+    return jsonify(movies)
 
-    movie_data={
-        "imdb_id": row[0],
-        "title": row[1],
-        "year": row[2],
-        "genre": row[3],
-        "plot": row[4],
-    }
-
-    return jsonify(movie_data)
-
+#Debug endpoint, now just fetches all the movies in the database.
 @app.route("/debug")
 def debug():
+    conn = sqlite3.connect(db_path, check_same_thread=False)
+    cur = conn.cursor()
     cur.execute("SELECT * FROM movies")
-    return jsonify(cur.fetchall())
+    rows = cur.fetchall()
+    conn.close()
+    return jsonify(rows)
 
 if __name__ == "__main__":
     app.run(debug=True)
