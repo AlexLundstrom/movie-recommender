@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Movie from './parts/Movie';
+import './App.css';
 
 //Component that fetches the movies from the backend
 //and displays them one by one using the Movie component
