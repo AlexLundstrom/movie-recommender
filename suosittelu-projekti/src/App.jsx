@@ -32,11 +32,20 @@ function App() {
 
   //Renders the current movie using the Movie component
   return (
-    <div className="App">
-      <Movie movie={movies[currentIndex]}
-      onYes={() => console.log("Open the movie.")}
-      onNo={() => setCurrentIndex(currentIndex + 1)}
-      />
+    <div id="root-content">
+      <header className="top-nav">
+      <h1 className="app-title">Movie Recommender</h1>
+      </header>
+    
+
+    <main className="movie-container">
+        <Movie
+          className="movie-card"
+          movie={movies[currentIndex]}
+          onYes={() => console.log("Open the movie.")}
+          onNo={() => setCurrentIndex(currentIndex + 1)}
+        />
+    </main>
     </div>
   );
 }

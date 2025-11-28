@@ -12,12 +12,14 @@ function Movie({movie, onYes, onNo}) {
             <h1>{movie.title}</h1>
             <h2>{movie.year}</h2>
             {isOpened && <p>{movie.plot}</p>}
+            <div className="button-container">
             {!isOpened && (
             <>
             <button onClick={() => { setIsOpened(true); onYes(); }}>Yes</button>
             <button onClick={onNo}>No</button>
             </>
             )}
+            </div>
         </div>
     )
 }
