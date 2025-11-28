@@ -30,7 +30,7 @@ function App() {
   //Renders the genre selection screen
   if (screen === "genres") {
     //Available genres
-    const genres=["Action", "Comedy", "Drama", "Adventure"];
+    const genre=["Action", "Comedy", "Drama", "Adventure"];
 
     return (
     <div id="root-content">
@@ -39,12 +39,13 @@ function App() {
       </header>
     
       <main className="genre-container">
-      {genres.map(g => (
+      {genre.map(g => (
         <button
           key={g}
            className="genre-button"
            onClick={() => {
             setSelectedGenre(g);
+            setCurrentIndex(0);
             setScreen("movies");
           }}
         >
@@ -60,13 +61,18 @@ function App() {
   //Renders the movie recommendation screen
   if(screen==="movies"){
 
+    //Filters movies by selected genre
+  const movies_filtered_genre = movies.filter(movie =>
+  movie.genre.includes(selectedGenre)
+  );
+
   //If movies are not yet loaded
-  if (!movies) {
+  if (!movies_filtered_genre) {
     return <p>Loading movies...</p>;
   }
 
   //If there are no more movies to show
-  if (currentIndex>=movies.length)
+  if (currentIndex>=movies_filtered_genre.length)
   {
     return <p>No more movies.</p>;
   }   
@@ -81,7 +87,7 @@ function App() {
     <main className="movie-container">
         <Movie
           className="movie-card"
-          movie={movies[currentIndex]}
+          movie={movies_filtered_genre[currentIndex]}
           onYes={() => console.log("Open the movie.")}
           onNo={() => setCurrentIndex(currentIndex + 1)}
         />
