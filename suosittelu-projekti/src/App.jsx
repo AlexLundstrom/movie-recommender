@@ -82,6 +82,7 @@ function App() {
       <header className="top-nav">
       <h1 className="app-title">Movie Recommender</h1>
       </header>
+      <header className="selected-genre">{selectedGenre}</header>
     
 
     <main className="movie-container">

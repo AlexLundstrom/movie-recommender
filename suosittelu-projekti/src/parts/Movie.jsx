@@ -11,7 +11,15 @@ function Movie({movie, onYes, onNo}) {
         <div className={`movie ${isOpened ? "opened" : ""}`}>
             <h1>{movie.title}</h1>
             <h2>{movie.year}</h2>
-            {isOpened && <p>{movie.plot}</p>}
+            <div className={`movie-details ${isOpened ? "show" : ""}`}>
+                <p>{movie.plot}</p>
+                <div className="imdb-link">
+                    <a href={`https://www.imdb.com/title/${movie.imdb_id}/`} 
+                    target="_blank" rel="noopener noreferrer">
+                    View on IMDb
+                    </a>
+                </div>
+            </div>
             <div className="button-container">
             {!isOpened && (
             <>
