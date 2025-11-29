@@ -71,4 +71,18 @@
 .movie-details.show {
   max-height: 500px;
   opacity: 1;
+  text-align: center
+}
+
+.details-genre {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 2px solid #646cff;
+  border-radius: 12px;
+  background-color: #e0e5ec;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-align: center;
+  margin-top: 10px;
+  margin: 10px auto 0;
 }

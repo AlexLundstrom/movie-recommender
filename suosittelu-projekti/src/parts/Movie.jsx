@@ -13,6 +13,7 @@ function Movie({movie, onYes, onNo}) {
             <h2>{movie.year}</h2>
             <div className={`movie-details ${isOpened ? "show" : ""}`}>
                 <p>{movie.plot}</p>
+                <p className="details-genre">{movie.genre}</p>
                 <div className="imdb-link">
                     <a href={`https://www.imdb.com/title/${movie.imdb_id}/`} 
                     target="_blank" rel="noopener noreferrer">
