@@ -22,7 +22,7 @@ function App() {
   //Fetches the movies from the backend
   useEffect(() => {
     //fetch("http://localhost:5000/movies")
-    fetch("/movies")
+    fetch("https://movie-recommender-backend-w51r.onrender.com/movies")
       .then(res => res.json())
       .then(setMovies)
       .catch(() => setMovies(null));
