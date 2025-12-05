@@ -5,15 +5,16 @@ import json
 import http.client
 import sqlite3
 import requests
-
+import os
 app = Flask(__name__)
 CORS(app)
 
-db_path="movies.db"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR, "movies.db")
 
 #Connects to the movies database, and fetches every movie in it.
 def get_movies_from_database():
-    conn=sqlite3.connect("movies.db",check_same_thread=False)
+    conn=sqlite3.connect(db_path,check_same_thread=False)
     cur=conn.cursor()
     cur.execute("SELECT imdb_id, title, year, genre, plot FROM movies")
     rows=cur.fetchall()
