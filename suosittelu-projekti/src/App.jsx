@@ -21,7 +21,8 @@ function App() {
 
   //Fetches the movies from the backend
   useEffect(() => {
-    fetch("http://localhost:5000/movies")
+    //fetch("http://localhost:5000/movies")
+    fetch("/movies")
       .then(res => res.json())
       .then(setMovies)
       .catch(() => setMovies(null));
@@ -67,7 +68,7 @@ function App() {
   );
 
   //If movies are not yet loaded
-  if (!movies_filtered_genre) {
+  if (!movies) {
     return <p>Loading movies...</p>;
   }
 
